@@ -31,21 +31,22 @@ function onGalleryItemClick(event) {
 
     const instance = basicLightbox.create(
         `<div class="modal-image">
-            <img class="gallery__link" src="${currentItem.dataset.source}" width="800" height="600">
+            <img class="gallery__link" src="${currentItem.dataset.source}" alt="${currentItem.alt}" width="800" height="600">
         </div>`);
     
     if (currentItem.nodeName !== `IMG`) {
         return
     };
     instance.show();
-    
+
     window.addEventListener(`keydown`, handleModalClose);
 
     function handleModalClose(event) {
         if (event.code === "Escape")
         {
-            instance.close()
+            instance.close();
+            window.removeEventListener('keydown', handleModalClose);
         };
-    };   
+    };
 };
 
